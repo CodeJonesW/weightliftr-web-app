@@ -1,0 +1,129 @@
+/* Global Styles */
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.main {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-input,
+.form-textarea {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #007bff;
+}
+
+.form-textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Profile Styles */
+.profile-card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.loading-message {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Results Styles */
+.results-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* CSS HEX */
+/* --rich-black: #0d1f2dff;
+--paynes-gray: #546a7bff;
+--cadet-gray: #9ea3b0ff;
+--misty-rose: #fae1dfff;
+--desert-sand: #e4c3adff; */
+
+/* CSS HSL */
+/* --rich-black: hsla(206, 55%, 11%, 1);
+--paynes-gray: hsla(206, 19%, 41%, 1);
+--cadet-gray: hsla(223, 10%, 65%, 1);
+--misty-rose: hsla(4, 73%, 93%, 1);
+--desert-sand: hsla(24, 50%, 79%, 1); */
+
+/* SCSS HEX */
+/* $rich-black: #0d1f2dff;
+$paynes-gray: #546a7bff;
+$cadet-gray: #9ea3b0ff;
+$misty-rose: #fae1dfff;
+$desert-sand: #e4c3adff; */
+
+/* SCSS HSL */
+/* $rich-black: hsla(206, 55%, 11%, 1);
+$paynes-gray: hsla(206, 19%, 41%, 1);
+$cadet-gray: hsla(223, 10%, 65%, 1);
+$misty-rose: hsla(4, 73%, 93%, 1);
+$desert-sand: hsla(24, 50%, 79%, 1); */
+
+/* SCSS RGB */
+/* $rich-black: rgba(13, 31, 45, 1);
+$paynes-gray: rgba(84, 106, 123, 1);
+$cadet-gray: rgba(158, 163, 176, 1);
+$misty-rose: rgba(250, 225, 223, 1);
+$desert-sand: rgba(228, 195, 173, 1); */
+
+/* SCSS Gradient */
+/* $gradient-top: linear-gradient(0deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-right: linear-gradient(90deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-bottom: linear-gradient(180deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-left: linear-gradient(270deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-top-right: linear-gradient(45deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-bottom-right: linear-gradient(135deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-top-left: linear-gradient(225deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-bottom-left: linear-gradient(315deg, #0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff);
+$gradient-radial: radial-gradient(#0d1f2dff, #546a7bff, #9ea3b0ff, #fae1dfff, #e4c3adff); */
