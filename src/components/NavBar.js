@@ -8,6 +8,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { FitnessCenter as FitnessCenterIcon } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
@@ -59,13 +60,13 @@ const NavBar = ({ isMenuDisabled }) => {
         </Toolbar>
       ) : (
         <Toolbar>
-          <ListAltIcon sx={{ marginRight: "8px" }} />
+          <FitnessCenterIcon sx={{ marginRight: "8px" }} />
           <Typography
             onClick={() => navigate("/")}
             variant="h6"
             sx={{ flexGrow: 1, color: theme.palette.text.primary }}
           >
-            My Goal Creator
+            Weightliftr
           </Typography>
 
           <Box>

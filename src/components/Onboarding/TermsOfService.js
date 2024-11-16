@@ -42,7 +42,7 @@ const TermsOfService = () => {
             variant="body1"
             sx={{ color: theme.palette.text.secondary, marginBottom: "20px" }}
           >
-            Welcome to My Goal Creator. Please read these terms and conditions
+            Welcome to Weightliftr. Please read these terms and conditions
             carefully before using our services.
           </Typography>
 
@@ -116,7 +116,7 @@ const TermsOfService = () => {
             variant="body1"
             sx={{ color: theme.palette.text.secondary, marginBottom: "20px" }}
           >
-            My Goal Creator will not be held responsible for any damages arising
+            Weightliftr will not be held responsible for any damages arising
             from the use or inability to use our services.
           </Typography>
 
@@ -135,7 +135,7 @@ const TermsOfService = () => {
             sx={{ color: theme.palette.text.secondary, marginBottom: "20px" }}
           >
             These terms shall be governed by and construed in accordance with
-            the laws of the jurisdiction in which My Goal Creator operates.
+            the laws of the jurisdiction in which Weightliftr operates.
           </Typography>
 
           <Box

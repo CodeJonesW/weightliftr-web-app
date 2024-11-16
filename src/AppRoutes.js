@@ -10,7 +10,6 @@ import {
   PrivateRoute,
   Goals,
   ViewGoal,
-  Tracker,
   TermsOfService,
   PrivacyPolicy,
 } from "./components/index.js";
@@ -43,10 +42,6 @@ function AppRoutes() {
         <Route
           path="/goal/:goal_id"
           element={<PrivateRoute element={<ViewGoal />} />}
-        />
-        <Route
-          path="/tracker/:goal_id"
-          element={<PrivateRoute element={<Tracker />} />}
         />
       </Routes>
     </Router>

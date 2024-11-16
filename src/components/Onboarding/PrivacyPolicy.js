@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
             variant="body1"
             sx={{ color: theme.palette.text.secondary, marginBottom: "20px" }}
           >
-            At My Goal Creator, we respect your privacy and are committed to
+            At Weightliftr, we respect your privacy and are committed to
             protecting the personal information you share with us. This privacy
             policy explains how we collect, use, and safeguard your information.
           </Typography>
