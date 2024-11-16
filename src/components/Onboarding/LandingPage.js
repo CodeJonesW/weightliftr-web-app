@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import NavBar from "../NavBar";
 import FeaturesSection from "./components/FeaturesSection";
 import HeroSection from "./components/HeroSection";
-import TestimonialsSection from "./components/TestimonialsSection";
+// import TestimonialsSection from "./components/TestimonialsSection";
 import PricingSection from "./components/PricingSection";
 import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
@@ -27,7 +27,7 @@ const LandingPage = () => {
       </Box>
       <HeroSection />
       <FeaturesSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <PricingSection />
       <CallToAction />
       <Footer />

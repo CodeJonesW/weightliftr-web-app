@@ -52,7 +52,7 @@ const ViewGoals = () => {
       console.error("Failed to delete goal", error);
     }
 
-    dispatch(getProfile({ token, setLatestGoal: false }));
+    dispatch(getProfile({ token }));
 
     setOpen(false);
     setGoalToDelete(null);

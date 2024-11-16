@@ -5,26 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { motion, useAnimation, useInView } from "framer-motion";
 
 const topics = [
-  "cook a delicious meal.",
-  "master time management.",
-  "plan a perfect vacation.",
-  "achieve your fitness goals.",
-  "organize your daily tasks.",
-  "speak a new language.",
-  "improve your coding skills.",
-  'write a "New York Times" bestseller.',
-  "launch a successful startup.",
-  "travel the world on a budget.",
-  "speak confidently in public.",
-  "build a sustainable lifestyle.",
-  "create a stunning piece of art.",
-  "run a marathon.",
-  "ace your next job interview.",
-  "start a profitable side hustle.",
-  "transform your daily habits.",
-  "craft the perfect resume.",
-  "design your dream home.",
-  "meditate like a pro.",
+  "Freely record workouts your way",
+  "Get stats",
+  "View leaderboards",
+  "Get motivated",
 ];
 
 const CallToAction = () => {
@@ -85,7 +69,7 @@ const CallToAction = () => {
               fontSize: { xs: "1.5rem", sm: "2rem" },
             }}
           >
-            <span style={{ marginRight: "4.5px" }}>Learn how to</span>
+            {/* <span style={{ marginRight: "4.5px" }}>Learn how to</span> */}
           </Typography>
           <Typography
             sx={{

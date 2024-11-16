@@ -25,7 +25,7 @@ const App = () => {
         <Box style={{ width: "100%", paddingBottom: "24px" }}>
           <NavBar />
         </Box>
-        <Analyze />
+        {/* <Analyze /> */}
       </Box>
     </Box>
   );

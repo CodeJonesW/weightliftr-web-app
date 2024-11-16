@@ -17,7 +17,7 @@ const Footer = () => {
       }}
     >
       <Typography variant="body2">
-        © 2024 My Goal Creator. All rights reserved.
+        © 2024 Weightliftr. All rights reserved.
       </Typography>
       <Box sx={{ marginTop: "16px" }}>
         <Button

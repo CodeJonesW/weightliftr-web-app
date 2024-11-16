@@ -24,28 +24,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import "./HoneycombGrid.css";
 
-const icons = [
-  <RocketLaunchIcon fontSize="medium" />,
-  <SportsEsportsIcon fontSize="medium" />,
-  <MusicNoteIcon fontSize="medium" />,
-  <LightbulbIcon fontSize="medium" />,
-  <WorkspacesIcon fontSize="medium" />,
-  <ComputerIcon fontSize="medium" />,
-  <StarIcon fontSize="medium" />,
-  <HeadphonesIcon fontSize="medium" />,
-  <CameraAltIcon fontSize="medium" />,
-  <PhoneAndroidIcon fontSize="medium" />,
-  <ScienceIcon fontSize="medium" />,
-  <AutoFixHighIcon fontSize="medium" />,
-  <ElectricBoltIcon fontSize="medium" />,
-  <SportsSoccerIcon fontSize="medium" />,
-  <PetsIcon fontSize="medium" />,
-  <CodeIcon fontSize="medium" />,
-  <BugReportIcon fontSize="medium" />,
-  <TravelExploreIcon fontSize="medium" />,
-  <FitnessCenterIcon fontSize="medium" />,
-  <SchoolIcon fontSize="medium" />,
-];
+const icons = [<FitnessCenterIcon fontSize="medium" />];
 
 const HoneycombGrid = ({ structure }) => {
   const theme = useTheme();

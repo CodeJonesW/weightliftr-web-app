@@ -38,7 +38,7 @@ const NavBar = ({ isMenuDisabled }) => {
   };
 
   const handleNavigateToGoals = () => {
-    dispatch(getProfile({ token, setLatestGoal: false }));
+    dispatch(getProfile({ token }));
     navigate("/goals");
   };
 
@@ -54,7 +54,7 @@ const NavBar = ({ isMenuDisabled }) => {
             variant="h6"
             sx={{ flexGrow: 1, color: theme.palette.text.primary }}
           >
-            My Goal Creator
+            Weightliftr
           </Typography>
         </Toolbar>
       ) : (

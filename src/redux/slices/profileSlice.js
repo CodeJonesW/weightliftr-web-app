@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const getProfile = createAsyncThunk(
   "profile/getProfile",
-  async ({ token, setLatestGoal }, { rejectWithValue, dispatch }) => {
+  async ({ token }, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(`/api/account/profile`, {
         headers: {
@@ -14,9 +14,6 @@ export const getProfile = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      if (setLatestGoal) {
-        dispatch(setGoal(response.data.recentGoal));
-      }
       return response.data;
     } catch (error) {
       dispatch(clearAuthToken());
@@ -29,31 +26,15 @@ const profileSlice = createSlice({
   name: "profile",
   initialState: {
     user: null,
-    goals: [],
     loading: false,
     error: false,
-    recentGoal: null,
-    showUiHelp: null,
-    dailyTodos: [],
-    dailyTodosCompletions: [],
-    dailyTodosCompletedToday: false,
   },
   reducers: {
     createDailyTodo: (state, action) => {
-      state.dailyTodos = [...state.dailyTodos, action.payload];
+      console.log("Creating daily todo", action.payload);
     },
     updateDailyTodo: (state, action) => {
       console.log("Updating daily todo", action.payload);
-      state.dailyTodos = state.dailyTodos.map((todo) => {
-        if (todo.daily_todo_id === action.payload.daily_todo_id) {
-          return {
-            ...todo,
-            completed: action.payload.completed,
-          };
-        } else {
-          return todo;
-        }
-      });
     },
   },
   extraReducers: (builder) => {
@@ -62,24 +43,10 @@ const profileSlice = createSlice({
         state.loading = true;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
-        const {
-          user,
-          goals,
-          recentGoal,
-          showUiHelp,
-          dailyTodos,
-          dailyTodosCompletions,
-          dailyTodosCompletedToday,
-        } = action.payload;
+        const { user } = action.payload;
         console.log("Got profile", action.payload);
         state.user = user;
-        state.goals = goals;
-        state.recentGoal = recentGoal;
-        state.showUiHelp = showUiHelp;
         state.loading = false;
-        state.dailyTodos = dailyTodos;
-        state.dailyTodosCompletions = dailyTodosCompletions;
-        state.dailyTodosCompletedToday = dailyTodosCompletedToday;
       })
       .addCase(getProfile.rejected, (state, action) => {
         console.log("Error fetching profile:", action);

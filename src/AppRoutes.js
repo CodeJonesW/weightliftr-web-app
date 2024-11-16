@@ -22,7 +22,7 @@ function AppRoutes() {
 
   useEffect(() => {
     if (token) {
-      dispatch(getProfile({ token: token, setLatestGoal: false }));
+      dispatch(getProfile({ token: token }));
     }
   }, [dispatch, token]);
 

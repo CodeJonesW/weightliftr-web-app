@@ -19,7 +19,7 @@ const Profile = () => {
   };
 
   const handleNavigateToGoals = () => {
-    dispatch(getProfile({ token, setLatestGoal: false }));
+    dispatch(getProfile({ token }));
     navigate("/goals");
   };
 

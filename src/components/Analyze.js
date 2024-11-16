@@ -67,7 +67,7 @@ const Analyze = () => {
           return "";
         });
         setLoading(false);
-        dispatch(getProfile({ token: token, setLatestGoal: true }));
+        dispatch(getProfile({ token: token }));
         navigate("/goal/" + goal_id);
       };
 

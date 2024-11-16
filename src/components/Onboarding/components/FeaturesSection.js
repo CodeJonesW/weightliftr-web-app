@@ -78,14 +78,14 @@ const FeaturesSection = () => {
                     marginBottom: "8px",
                   }}
                 >
-                  Define Your Goal
+                  Weightlifting Notepad
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{ color: theme.palette.text.secondary }}
                 >
-                  Use our AI-powered tool to clearly define the path to your
-                  goal.
+                  Record your workouts in a digital notepad. Use your own
+                  format.
                 </Typography>
               </Paper>
             </motion.div>
@@ -124,14 +124,13 @@ const FeaturesSection = () => {
                     marginBottom: "8px",
                   }}
                 >
-                  Dive into Subtopics
+                  View stats
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{ color: theme.palette.text.secondary }}
                 >
-                  Generate detailed plans and resources for each subtopic of
-                  your goal.
+                  See progress over time with detailed statistics and graphs.
                 </Typography>
               </Paper>
             </motion.div>
@@ -170,14 +169,13 @@ const FeaturesSection = () => {
                     marginBottom: "8px",
                   }}
                 >
-                  Track Progress
+                  Get suggestions
                 </Typography>
                 <Typography
                   variant="body1"
                   sx={{ color: theme.palette.text.secondary }}
                 >
-                  Stay on top of your progress with real-time tracking and
-                  analytics.
+                  Get suggestions on how to modify your workouts incrementally.
                 </Typography>
               </Paper>
             </motion.div>

@@ -71,10 +71,13 @@ const PricingSection = () => {
                   }}
                 >
                   <ListItem>
-                    <ListItemText primary="- Basic AI Goal Planning and Analysis." />
+                    <ListItemText primary="- Everything you need to track daily weight lifting sessions" />
                   </ListItem>
                   <ListItem>
-                    <ListItemText primary="- Dive into goal subtopics." />
+                    <ListItemText primary="- View stats" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText primary="- Get reccomendations" />
                   </ListItem>
                 </List>
               </Box>
@@ -93,7 +96,7 @@ const PricingSection = () => {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} md={4} mt={4} mb={4}>
+          {/* <Grid item xs={12} md={4} mt={4} mb={4}>
             <Paper
               elevation={6}
               sx={{
@@ -148,7 +151,7 @@ const PricingSection = () => {
                 Coming Soon
               </Button>
             </Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Box>

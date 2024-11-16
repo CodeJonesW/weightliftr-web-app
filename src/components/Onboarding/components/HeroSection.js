@@ -83,7 +83,7 @@ const HeroSection = () => {
                   color: theme.palette.text.primary,
                 }}
               >
-                My Goal Creator
+                Weightliftr
               </Typography>
               <Typography
                 variant="body1"
@@ -94,7 +94,7 @@ const HeroSection = () => {
                   color: theme.palette.text.secondary,
                 }}
               >
-                Set and track your goals. Dive into the plan.
+                Record workouts your way. See stats. Get motivated
               </Typography>
               <Box sx={{ display: "flex", gap: "16px" }}>
                 <Button
