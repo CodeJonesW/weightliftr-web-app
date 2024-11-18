@@ -1,53 +1,53 @@
 export const themeConfig = {
   palette: {
     primary: {
-      main: "#0d1f2d", // Rich Black as the primary color
-      contrastText: "#fae1df", // Misty Rose for contrast on primary elements
+      main: "#0E8388", // Teal as the primary color
+      contrastText: "#CBE4DE", // Light Mint for contrast on primary elements
     },
     secondary: {
-      main: "#546a7b", // Payne's Gray as secondary color
-      contrastText: "#e4c3ad", // Desert Sand for contrast
+      main: "#2E4F4F", // Deep Green as secondary color
+      contrastText: "#CBE4DE", // Light Mint for contrast
     },
     background: {
-      default: "#0d1f2d", // Rich Black for the default background
-      paper: "#222b32", // Payne's Gray for card and paper backgrounds
+      default: "#2C3333", // Dark Gray-Green for the default background
+      paper: "#2E4F4F", // Deep Green for card and paper backgrounds
     },
     text: {
-      primary: "#fae1df", // Misty Rose for primary text (light color on dark background)
-      secondary: "#e4c3ad", // Desert Sand for secondary text
+      primary: "#CBE4DE", // Light Mint for primary text (light color on dark background)
+      secondary: "#CBE4DE", // Same Light Mint for secondary text
     },
     action: {
-      hover: "#9ea3b0", // Cadet Gray for hover state
+      hover: "#0E8388", // Teal for hover state
     },
   },
   typography: {
     fontFamily: "Roboto, sans-serif",
     h1: {
       fontWeight: 700,
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
     h2: {
       fontWeight: "bold",
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
     h3: {
       fontWeight: "bold",
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
     h4: {
       fontWeight: "bold",
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
     h5: {
       fontWeight: "bold",
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
     body1: {
-      color: "#e4c3ad",
+      color: "#CBE4DE",
     },
     button: {
       textTransform: "none",
-      color: "#fae1df",
+      color: "#CBE4DE",
     },
   },
 };

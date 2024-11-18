@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-  Box,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Button,
-  Card,
-  TextField,
-  FormGroup,
-  Collapse,
-} from "@mui/material";
+import { Box, Button, Card, TextField, Grid, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
-import TuneIcon from "@mui/icons-material/Tune";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useDispatch, useSelector } from "react-redux";
-import { createWorkout } from "../../redux/slices/workoutSlice";
+import {
+  createWorkout,
+  deleteWorkout,
+  updateWorkout,
+} from "../../redux/slices/workoutSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Workout = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [workout_text, setWorkoutText] = useState("");
   const { workout_id } = useSelector((state) => state.workoutSlice);
   const { token } = useSelector((state) => state.authSlice);
 
   const handleCreateWorkout = async () => {
-    console.log("Creating workout...");
     dispatch(createWorkout({ token }));
+  };
+
+  const handleDeleteWorkout = async () => {
+    console.log("delete workout");
+    dispatch(deleteWorkout({ token, workout_id }));
+  };
+
+  const handleFinishWorkout = () => {
+    console.log("finish workout");
+    dispatch(updateWorkout({ token, workout_id, workout_text }));
   };
 
   return (
@@ -37,24 +41,53 @@ const Workout = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <Box sx={{ padding: "24px" }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "20px",
-            backgroundColor: theme.palette.background.paper,
-            borderRadius: "10px",
-            width: "300px",
-          }}
-        >
-          {!workout_id ? (
-            <Box style={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        container
+        sx={{ height: "80vh" }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid item xs={12} sm={8} md={6} sx={{ height: "100%" }}>
+          <Card
+            sx={{
+              height: "90%",
+              width: "300px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "24px",
+              backgroundColor: theme.palette.background.paper,
+              borderRadius: "10px",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                paddingBottom: "16px",
+              }}
+            >
+              {workout_id ? (
+                <Box>
+                  <IconButton onClick={handleFinishWorkout}>
+                    <CheckIcon color="text.secondary" />
+                  </IconButton>
+                  <IconButton
+                    color="text.secondary"
+                    onClick={handleDeleteWorkout}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              ) : null}
+            </Box>
+            {!workout_id ? (
               <Button
                 onClick={handleCreateWorkout}
-                variant={"contained"}
+                variant="contained"
                 disabled={loading}
+                size="large"
               >
                 {loading ? (
                   <CircularProgress size={24} />
@@ -62,14 +95,19 @@ const Workout = () => {
                   <AddCircleOutlineIcon />
                 )}
               </Button>
-            </Box>
-          ) : (
-            <Card>
-              <TextField sx={{ width: "100%", height: "100%" }} />
-            </Card>
-          )}
-        </Box>
-      </Box>
+            ) : (
+              <TextField
+                fullWidth
+                multiline
+                rows={15}
+                placeholder="Enter workout details..."
+                value={workout_text}
+                onChange={(e) => setWorkoutText(e.target.value)}
+              />
+            )}
+          </Card>
+        </Grid>
+      </Grid>
     </motion.div>
   );
 };

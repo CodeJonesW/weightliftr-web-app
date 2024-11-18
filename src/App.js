@@ -20,7 +20,7 @@ const App = () => {
           alignItems: "center",
           justifyContent: "flex-start",
           overflow: "scroll",
-          background: theme.palette.primary.main,
+          background: theme.palette.background.default,
         }}
       >
         <Box style={{ width: "100%", paddingBottom: "24px" }}>
