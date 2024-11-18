@@ -41,7 +41,7 @@ export const deleteWorkout = createAsyncThunk(
 export const getWorkout = createAsyncThunk(
   "workout/getWorkout",
   async ({ workout_id, token }) => {
-    console.log("Getting workout... action", workout_id, token);
+    console.log("Getting workout... action", workout_id);
     const response = await axios.post(
       `/api/workout/getWorkout`,
       { workout_id },
@@ -52,6 +52,7 @@ export const getWorkout = createAsyncThunk(
         },
       }
     );
+    console.log(response);
     return response.data;
   }
 );
@@ -82,7 +83,11 @@ const workoutSlice = createSlice({
     loading: false,
     error: false,
   },
-  reducers: {},
+  reducers: {
+    setCurrentWorkout: (state, action) => {
+      state.workout_id = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createWorkout.pending, (state) => {
@@ -101,7 +106,6 @@ const workoutSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteWorkout.fulfilled, (state) => {
-        console.log("deleteWorkout.fulfilled");
         state.workout_id = null;
         state.loading = false;
         localStorage.removeItem("workout_id");
@@ -114,8 +118,12 @@ const workoutSlice = createSlice({
         state.loading = true;
       })
       .addCase(getWorkout.fulfilled, (state, action) => {
+        console.log("get workout", action.payload);
+        const { workout } = action.payload;
+        console.log("workout action", workout);
+
         state.loading = false;
-        state.workout = action.payload;
+        state.workout = workout;
       })
       .addCase(getWorkout.rejected, (state) => {
         state.error = true;
@@ -134,5 +142,7 @@ const workoutSlice = createSlice({
       });
   },
 });
+
+export const { setCurrentWorkout } = workoutSlice.actions;
 
 export default workoutSlice;

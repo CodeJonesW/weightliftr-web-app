@@ -9,7 +9,7 @@ export async function onRequest(context) {
     ? "http://localhost:8787"
     : "https://tube-script-ai-worker.williamjonescodes.workers.dev";
 
-  const url = `${workerUrl}/api/workout`;
+  const url = `${workerUrl}/api/workout?workout_id=${workout_id}`;
 
   const init = {
     method: "GET",
@@ -17,7 +17,6 @@ export async function onRequest(context) {
       "Content-Type": "application/json",
       Authorization: context.request.headers.get("Authorization"),
     },
-    body: JSON.stringify({ workout_id }),
   };
 
   try {
@@ -29,6 +28,7 @@ export async function onRequest(context) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.log(error);
     return new Response(JSON.stringify({ error: "Failed to create workout" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

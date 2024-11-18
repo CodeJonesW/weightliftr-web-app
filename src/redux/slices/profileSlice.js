@@ -28,6 +28,7 @@ const profileSlice = createSlice({
     user: null,
     loading: false,
     error: false,
+    workouts: [],
   },
   reducers: {
     createDailyTodo: (state, action) => {
@@ -43,10 +44,11 @@ const profileSlice = createSlice({
         state.loading = true;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
-        const { user } = action.payload;
+        const { user, workouts } = action.payload;
         console.log("Got profile", action.payload);
         state.user = user;
         state.loading = false;
+        state.workouts = workouts;
       })
       .addCase(getProfile.rejected, (state, action) => {
         console.log("Error fetching profile:", action);

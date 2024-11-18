@@ -29,6 +29,7 @@ export async function onRequest(context) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.log("error", error);
     return new Response(JSON.stringify({ error: "Failed to create workout" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

@@ -14,6 +14,7 @@ import {
   PrivacyPolicy,
 } from "./components/index.js";
 import App from "./App.js";
+import ViewWorkouts from "./components/Workout/ViewWorkouts";
 
 function AppRoutes() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ function AppRoutes() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/" element={<PrivateRoute element={<App />} />} />
         <Route path="/goals" element={<PrivateRoute element={<Goals />} />} />
+        <Route
+          path="/workouts"
+          element={<PrivateRoute element={<ViewWorkouts />} />}
+        />
         <Route
           path="/profile"
           element={<PrivateRoute element={<Profile />} />}
