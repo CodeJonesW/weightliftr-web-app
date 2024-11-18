@@ -85,8 +85,8 @@ const NavBar = ({ isMenuDisabled }) => {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => navigate("/")}>Create Goal</MenuItem>
-              <MenuItem onClick={handleNavigateToGoals}>View Goals</MenuItem>
+              <MenuItem onClick={() => navigate("/")}>Create Workout</MenuItem>
+              <MenuItem onClick={handleNavigateToGoals}>Past Workouts</MenuItem>
               <MenuItem onClick={() => navigate("/profile")}>
                 View Profile
               </MenuItem>
