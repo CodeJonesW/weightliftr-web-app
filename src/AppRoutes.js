@@ -35,19 +35,14 @@ function AppRoutes() {
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/" element={<PrivateRoute element={<App />} />} />
-        <Route path="/goals" element={<PrivateRoute element={<Goals />} />} />
         <Route
           path="/workouts"
           element={<PrivateRoute element={<ViewWorkouts />} />}
         />
-        <Route
-          path="/profile"
-          element={<PrivateRoute element={<Profile />} />}
-        />
-        <Route
+        {/* <Route
           path="/goal/:goal_id"
           element={<PrivateRoute element={<ViewGoal />} />}
-        />
+        /> */}
       </Routes>
     </Router>
   );
