@@ -32,6 +32,10 @@ const ViewWorkouts = () => {
   const [open, setOpen] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);
 
+  useEffect(() => {
+    dispatch(getProfile({ token }));
+  }, [dispatch, token]);
+
   const handleDeleteWorkout = async () => {
     if (!workoutToDelete) return;
 
