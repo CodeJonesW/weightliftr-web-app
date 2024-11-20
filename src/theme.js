@@ -1,53 +1,35 @@
-export const themeConfig = {
+import { createTheme } from "@mui/material/styles";
+
+export const themeConfig = createTheme({
   palette: {
+    mode: "dark",
     primary: {
-      main: "#0E8388", // Teal as the primary color
-      contrastText: "#CBE4DE", // Light Mint for contrast on primary elements
+      main: "#007BFF", // Vibrant Blue
+      contrastText: "#FFFFFF", // Text on Primary
     },
     secondary: {
-      main: "#2E4F4F", // Deep Green as secondary color
-      contrastText: "#CBE4DE", // Light Mint for contrast
+      main: "#E0E0E0", // Light Gray
+      contrastText: "#000000", // Text on Secondary
     },
     background: {
-      default: "#2C3333", // Dark Gray-Green for the default background
-      paper: "#2E4F4F", // Deep Green for card and paper backgrounds
+      default: "#121212", // Dark background
+      paper: "#1E1E1E", // Surface color
     },
     text: {
-      primary: "#CBE4DE", // Light Mint for primary text (light color on dark background)
-      secondary: "#CBE4DE", // Same Light Mint for secondary text
+      primary: "#E0E0E0", // Light Gray
+      secondary: "#B0B0B0", // Mid Gray
+      disabled: "#8A8A8A", // Dim Gray
     },
-    action: {
-      hover: "#0E8388", // Teal for hover state
+    error: {
+      main: "#CF6679", // Soft Red
+      contrastText: "#000000", // Text on Error
     },
+    divider: "#373737", // Divider color
   },
-  typography: {
-    fontFamily: "Roboto, sans-serif",
-    h1: {
-      fontWeight: 700,
-      color: "#CBE4DE",
-    },
-    h2: {
-      fontWeight: "bold",
-      color: "#CBE4DE",
-    },
-    h3: {
-      fontWeight: "bold",
-      color: "#CBE4DE",
-    },
-    h4: {
-      fontWeight: "bold",
-      color: "#CBE4DE",
-    },
-    h5: {
-      fontWeight: "bold",
-      color: "#CBE4DE",
-    },
-    body1: {
-      color: "#CBE4DE",
-    },
-    button: {
-      textTransform: "none",
-      color: "#CBE4DE",
-    },
-  },
-};
+  shadows: [
+    "none",
+    "0px 1px 3px rgba(0, 0, 0, 0.05)", // Example shadows with elevation overlay
+    "0px 1px 2px rgba(0, 0, 0, 0.07)",
+    // ... Add higher levels of elevation
+  ],
+});

@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Box, Button, Card, TextField, Grid, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  TextField,
+  Grid,
+  IconButton,
+  Typography,
+  Divider,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -13,6 +22,8 @@ import {
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import Exercise from "./Exercise";
+import axios from "axios";
 
 const Workout = () => {
   const theme = useTheme();
@@ -20,11 +31,7 @@ const Workout = () => {
   const { token } = useSelector((state) => state.authSlice);
   const { workout_id, workout } = useSelector((state) => state.workoutSlice);
   const [loading, setLoading] = useState(false);
-  const [textFieldRows, setTextFieldRows] = useState(1);
-  const cardRef = useRef(null);
-  const [workout_text, setWorkoutText] = useState(
-    workout ? workout.workout_text : ""
-  );
+  const [workoutExercises, setWorkoutExercises] = useState([]);
 
   useEffect(() => {
     if (workout_id) {
@@ -33,20 +40,13 @@ const Workout = () => {
   }, [workout_id, dispatch, token]);
 
   useEffect(() => {
-    if (workout) {
-      setWorkoutText(workout.workout_text);
+    if (workout && workout.exercises.length > 0) {
+      const parsedExercises = workout.exercises.map((exercise) => {
+        return `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
+      });
+      setWorkoutExercises(parsedExercises);
     }
   }, [workout]);
-
-  useEffect(() => {
-    if (cardRef.current) {
-      const cardHeight = cardRef.current.offsetHeight;
-      const lineHeight = 32;
-      const padding = 72;
-      const rows = Math.floor((cardHeight - padding) / lineHeight);
-      setTextFieldRows(rows > 0 ? rows : 1);
-    }
-  }, [cardRef, workout_id]);
 
   const handleCreateWorkout = async () => {
     dispatch(createWorkout({ token }));
@@ -57,7 +57,27 @@ const Workout = () => {
   };
 
   const handleFinishWorkout = () => {
-    dispatch(updateWorkout({ token, workout_id, workout_text }));
+    dispatch(updateWorkout({ token, workout_id, workout_text: "finished" }));
+  };
+
+  const handleAddExerciseToWorkout = async (exercise) => {
+    const result = await axios.post(
+      "api/exercise/createExercise",
+      {
+        workout_id,
+        exercise,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const savedExercise = `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
+    setWorkoutExercises([...workoutExercises, savedExercise]);
+
+    console.log("result", result);
   };
 
   return (
@@ -74,7 +94,6 @@ const Workout = () => {
       >
         <Grid item xs={12} sm={8} md={6} sx={{ height: "100%" }}>
           <Card
-            ref={cardRef}
             sx={{
               height: "90%",
               width: "300px",
@@ -122,14 +141,30 @@ const Workout = () => {
                 )}
               </Button>
             ) : (
-              <TextField
-                fullWidth
-                multiline
-                rows={textFieldRows}
-                placeholder="Enter workout details..."
-                value={workout_text}
-                onChange={(e) => setWorkoutText(e.target.value)}
-              />
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  {workoutExercises.map((exercise, index) => {
+                    return (
+                      <Typography key={index} variant="body1">
+                        {exercise}
+                      </Typography>
+                    );
+                  })}
+                </Box>
+                <Box sx={{ paddingTop: "8px", paddingBottom: "16px" }}>
+                  <Divider />
+                </Box>
+                <Box>
+                  <Exercise addExercise={handleAddExerciseToWorkout} />
+                </Box>
+              </Box>
             )}
           </Card>
         </Grid>

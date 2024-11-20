@@ -39,8 +39,7 @@ const NavBar = ({ isMenuDisabled }) => {
   };
 
   const handleNavigateToGoals = () => {
-    dispatch(getProfile({ token }));
-    navigate("/goals");
+    navigate("/workouts");
   };
 
   return (

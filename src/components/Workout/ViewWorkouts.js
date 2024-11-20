@@ -121,7 +121,7 @@ const ViewWorkouts = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Typography variant={"h6"}>Goals Research</Typography>
+              <Typography variant={"h6"}>Past Workouts</Typography>
               <Box>
                 <IconButton
                   size="small"
