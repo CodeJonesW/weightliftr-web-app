@@ -5,7 +5,6 @@ import axios from "axios";
 export const createWorkout = createAsyncThunk(
   "workout/createWorkout",
   async ({ token }) => {
-    console.log("Creating workout... action", token);
     const response = await axios.post(
       `/api/workout/createWorkout`,
       {},
@@ -23,7 +22,6 @@ export const createWorkout = createAsyncThunk(
 export const deleteWorkout = createAsyncThunk(
   "workout/deleteWorkout",
   async ({ token, workout_id }) => {
-    console.log("Deleting workout... action", token, workout_id);
     const response = await axios.post(
       `/api/workout/deleteWorkout`,
       { workout_id: workout_id },
@@ -41,7 +39,6 @@ export const deleteWorkout = createAsyncThunk(
 export const getWorkout = createAsyncThunk(
   "workout/getWorkout",
   async ({ workout_id, token }) => {
-    console.log("Getting workout... action", workout_id);
     const response = await axios.post(
       `/api/workout/getWorkout`,
       { workout_id },
@@ -60,7 +57,6 @@ export const getWorkout = createAsyncThunk(
 export const updateWorkout = createAsyncThunk(
   "workout/updateWorkout",
   async ({ workout_id, workout_text, token }) => {
-    console.log("Updating workout... action", workout_id, workout_text, token);
     const response = await axios.post(
       `/api/workout/updateWorkout`,
       { workout_id, workout_text },
@@ -96,7 +92,6 @@ const workoutSlice = createSlice({
       .addCase(createWorkout.fulfilled, (state, action) => {
         state.workout_id = action.payload.workout_id;
         state.loading = false;
-        localStorage.setItem("workout_id", action.payload.workout_id);
       })
       .addCase(createWorkout.rejected, (state, action) => {
         state.error = true;
@@ -108,7 +103,6 @@ const workoutSlice = createSlice({
       .addCase(deleteWorkout.fulfilled, (state) => {
         state.workout_id = null;
         state.loading = false;
-        localStorage.removeItem("workout_id");
       })
       .addCase(deleteWorkout.rejected, (state) => {
         state.error = true;
@@ -118,7 +112,6 @@ const workoutSlice = createSlice({
         state.loading = true;
       })
       .addCase(getWorkout.fulfilled, (state, action) => {
-        console.log("get workout", action.payload);
         state.loading = false;
         state.workout = action.payload;
       })
