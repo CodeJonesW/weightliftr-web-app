@@ -15,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { clearAuthToken } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { useSelector } from "react-redux";
 
 const NavBar = ({ isMenuDisabled }) => {
   const dispatch = useDispatch();
