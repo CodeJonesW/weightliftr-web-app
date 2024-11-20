@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { clearAuthToken } from "./authSlice";
-import { setGoal } from "./goalSlice";
 import axios from "axios";
 
 export const getProfile = createAsyncThunk(
