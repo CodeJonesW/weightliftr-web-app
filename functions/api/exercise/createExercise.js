@@ -4,7 +4,7 @@ export async function onRequest(context) {
 
   const workerUrl = isLocal
     ? "http://localhost:8787"
-    : "https://tube-script-ai-worker.williamjonescodes.workers.dev";
+    : "https://weightliftr-worker.williamjonescodes.workers.dev";
 
   const url = `${workerUrl}/api/exercise`;
   const body = await context.request.json();
