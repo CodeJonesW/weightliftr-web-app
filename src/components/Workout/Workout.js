@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   Box,
   Button,
   Card,
-  TextField,
   Grid,
   IconButton,
   Typography,
@@ -30,7 +29,6 @@ const Workout = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authSlice);
   const { workout_id, workout } = useSelector((state) => state.workoutSlice);
-  const [loading, setLoading] = useState(false);
   const [workoutExercises, setWorkoutExercises] = useState([]);
 
   useEffect(() => {
@@ -131,14 +129,9 @@ const Workout = () => {
               <Button
                 onClick={handleCreateWorkout}
                 variant="contained"
-                disabled={loading}
                 size="large"
               >
-                {loading ? (
-                  <CircularProgress size={24} />
-                ) : (
-                  <AddCircleOutlineIcon />
-                )}
+                <AddCircleOutlineIcon />
               </Button>
             ) : (
               <Box>

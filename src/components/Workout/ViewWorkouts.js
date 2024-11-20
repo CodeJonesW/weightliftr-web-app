@@ -21,22 +21,18 @@ import { setCurrentWorkout } from "../../redux/slices/workoutSlice";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewWorkouts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { workouts } = useSelector((state) => state.profileSlice);
-  console.log("workouts", workouts);
   const { token } = useSelector((state) => state.authSlice);
 
   const [open, setOpen] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);
 
-  const handleShowGoal = async (workout_id) => {
-    navigate(`/workout/${workout_id}`);
-  };
-
-  const handleDeleteGoal = async () => {
+  const handleDeleteWorkout = async () => {
     if (!workoutToDelete) return;
 
     try {
@@ -155,6 +151,15 @@ const ViewWorkouts = () => {
                     key={workout.workout_id}
                   >
                     <Typography>{workout.created_at}</Typography>
+                    {showDeleteButton ? (
+                      <IconButton>
+                        <DeleteIcon
+                          onClick={() =>
+                            handleOpenDeleteDialog(workout.workout_id)
+                          }
+                        />
+                      </IconButton>
+                    ) : null}
                   </ListItem>
                 ))
               ) : (
@@ -181,7 +186,7 @@ const ViewWorkouts = () => {
               </Button>
               <Button
                 variant="outlined"
-                onClick={handleDeleteGoal}
+                onClick={handleDeleteWorkout}
                 color="error"
               >
                 Delete

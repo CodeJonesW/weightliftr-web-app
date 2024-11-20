@@ -16,14 +16,12 @@ import { clearAuthToken } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { useSelector } from "react-redux";
-import { getProfile } from "../redux/slices/profileSlice";
 
 const NavBar = ({ isMenuDisabled }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
-  const { token } = useSelector((state) => state.authSlice);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

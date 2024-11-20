@@ -3,13 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "./redux/slices/profileSlice";
 import {
-  Profile,
   Login,
   LandingPage,
   Register,
   PrivateRoute,
-  Goals,
-  ViewGoal,
   TermsOfService,
   PrivacyPolicy,
 } from "./components/index.js";

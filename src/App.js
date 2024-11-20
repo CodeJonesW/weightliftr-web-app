@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import "./App.css";
-import { Analyze, NavBar } from "./components/index.js";
+import { NavBar } from "./components/index.js";
 import { useTheme } from "@mui/material/styles";
 import Workout from "./components/Workout/Workout";
 

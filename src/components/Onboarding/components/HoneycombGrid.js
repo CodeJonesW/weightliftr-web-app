@@ -1,26 +1,5 @@
 import React, { useState } from "react";
-import {
-  SportsEsports as SportsEsportsIcon,
-  MusicNote as MusicNoteIcon,
-  Lightbulb as LightbulbIcon,
-  Workspaces as WorkspacesIcon,
-  Computer as ComputerIcon,
-  Star as StarIcon,
-  Headphones as HeadphonesIcon,
-  CameraAlt as CameraAltIcon,
-  PhoneAndroid as PhoneAndroidIcon,
-  Science as ScienceIcon,
-  AutoFixHigh as AutoFixHighIcon,
-  ElectricBolt as ElectricBoltIcon,
-  SportsSoccer as SportsSoccerIcon,
-  RocketLaunch as RocketLaunchIcon,
-  Pets as PetsIcon,
-  Code as CodeIcon,
-  BugReport as BugReportIcon,
-  TravelExplore as TravelExploreIcon,
-  FitnessCenter as FitnessCenterIcon,
-  School as SchoolIcon,
-} from "@mui/icons-material";
+import { FitnessCenter as FitnessCenterIcon } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import "./HoneycombGrid.css";
 
