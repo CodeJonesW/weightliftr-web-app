@@ -17,6 +17,7 @@ import {
   deleteWorkout,
   updateWorkout,
   getWorkout,
+  setCurrentWorkout,
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
@@ -54,7 +55,7 @@ const Workout = () => {
   };
 
   const handleFinishWorkout = () => {
-    dispatch(updateWorkout({ token, workout_id, workout_text: "finished" }));
+    dispatch(setCurrentWorkout(null));
   };
 
   const handleAddExerciseToWorkout = async (exercise) => {
