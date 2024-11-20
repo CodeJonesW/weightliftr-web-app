@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Card,
@@ -26,15 +27,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const ViewWorkouts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
   const { workouts } = useSelector((state) => state.profileSlice);
   const { token } = useSelector((state) => state.authSlice);
 
   const [open, setOpen] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);
-
-  useEffect(() => {
-    dispatch(getProfile({ token }));
-  }, [dispatch, token]);
 
   const handleDeleteWorkout = async () => {
     if (!workoutToDelete) return;
@@ -99,105 +97,105 @@ const ViewWorkouts = () => {
       <Box
         sx={{
           padding: "24px",
-          height: "100%",
-          width: "100%",
+          height: "100vh",
+          width: "100vw",
           justifyContent: "center",
           display: "flex",
+          backgroundColor: theme.palette.background.default,
         }}
       >
-        <Box className="main">
-          <Card
-            style={{
-              padding: "20px",
-              borderRadius: "16px",
-              maxWidth: "300px",
+        <Card
+          style={{
+            padding: "20px",
+            borderRadius: "16px",
+            maxWidth: "300px",
+            height: "80%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography variant={"h6"}>Past Workouts</Typography>
-              <Box>
-                <IconButton
-                  size="small"
-                  id="basic-button"
-                  aria-controls={isEditMenuOpen ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={isEditMenuOpen ? "true" : undefined}
-                  onClick={handleClick}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={isEditMenuOpen}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    "aria-labelledby": "basic-button",
-                  }}
-                >
-                  <MenuItem onClick={handleEdit}>Edit</MenuItem>
-                </Menu>
-              </Box>
-            </Box>
-
-            <List>
-              {workouts.length > 0 ? (
-                workouts.map((workout, index) => (
-                  <ListItem
-                    onClick={() => handleShowWorkout(workout.workout_id)}
-                    key={workout.workout_id}
-                  >
-                    <Typography>{workout.created_at}</Typography>
-                    {showDeleteButton ? (
-                      <IconButton>
-                        <DeleteIcon
-                          onClick={() =>
-                            handleOpenDeleteDialog(workout.workout_id)
-                          }
-                        />
-                      </IconButton>
-                    ) : null}
-                  </ListItem>
-                ))
-              ) : (
-                <p>No workouts saved</p>
-              )}
-            </List>
-          </Card>
-
-          <Dialog
-            sx={{ borderRadius: "16px" }}
-            open={open}
-            onClose={handleCloseDialog}
-          >
-            <DialogTitle>Delete Goal</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Are you sure you want to delete this workout? This action cannot
-                be undone.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button variant="contained" onClick={handleCloseDialog}>
-                Cancel
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={handleDeleteWorkout}
-                color="error"
+            <Typography variant={"h6"}>Past Workouts</Typography>
+            <Box>
+              <IconButton
+                size="small"
+                id="basic-button"
+                aria-controls={isEditMenuOpen ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={isEditMenuOpen ? "true" : undefined}
+                onClick={handleClick}
               >
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </Box>
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={isEditMenuOpen}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              </Menu>
+            </Box>
+          </Box>
+
+          <List>
+            {workouts.length > 0 ? (
+              workouts.map((workout, index) => (
+                <ListItem
+                  onClick={() => handleShowWorkout(workout.workout_id)}
+                  key={workout.workout_id}
+                >
+                  <Typography>{workout.created_at}</Typography>
+                  {showDeleteButton ? (
+                    <IconButton>
+                      <DeleteIcon
+                        onClick={() =>
+                          handleOpenDeleteDialog(workout.workout_id)
+                        }
+                      />
+                    </IconButton>
+                  ) : null}
+                </ListItem>
+              ))
+            ) : (
+              <p>No workouts saved</p>
+            )}
+          </List>
+        </Card>
+
+        <Dialog
+          sx={{ borderRadius: "16px" }}
+          open={open}
+          onClose={handleCloseDialog}
+        >
+          <DialogTitle>Delete Goal</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete this workout? This action cannot
+              be undone.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" onClick={handleCloseDialog}>
+              Cancel
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={handleDeleteWorkout}
+              color="error"
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </motion.div>
   );

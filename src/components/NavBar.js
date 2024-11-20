@@ -8,6 +8,8 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { getProfile } from "../redux/slices/profileSlice";
 import { FitnessCenter as FitnessCenterIcon } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
@@ -21,6 +23,7 @@ const NavBar = ({ isMenuDisabled }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { token } = useSelector((state) => state.authSlice);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,6 +39,7 @@ const NavBar = ({ isMenuDisabled }) => {
   };
 
   const handleNavigateToGoals = () => {
+    dispatch(getProfile({ token }));
     navigate("/workouts");
   };
 

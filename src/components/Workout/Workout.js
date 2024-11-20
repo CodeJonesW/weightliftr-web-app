@@ -21,6 +21,7 @@ import {
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import SaveIcon from "@mui/icons-material/Save";
 import Exercise from "./Exercise";
 import axios from "axios";
 
@@ -114,7 +115,7 @@ const Workout = () => {
               {workout_id ? (
                 <Box>
                   <IconButton onClick={handleFinishWorkout}>
-                    <CheckIcon color="text.secondary" />
+                    <SaveIcon color="text.secondary" />
                   </IconButton>
                   <IconButton
                     color="text.secondary"
