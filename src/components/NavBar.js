@@ -38,9 +38,14 @@ const NavBar = ({ isMenuDisabled }) => {
     navigate("/welcome");
   };
 
-  const handleNavigateToGoals = () => {
+  const handleNavigateToWorkouts = () => {
     dispatch(getProfile({ token }));
+    localStorage.removeItem("workout_id");
     navigate("/workouts");
+  };
+
+  const handleCreateWorkout = () => {
+    navigate("/");
   };
 
   return (
@@ -85,8 +90,10 @@ const NavBar = ({ isMenuDisabled }) => {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => navigate("/")}>Create Workout</MenuItem>
-              <MenuItem onClick={handleNavigateToGoals}>Past Workouts</MenuItem>
+              <MenuItem onClick={handleCreateWorkout}>Create Workout</MenuItem>
+              <MenuItem onClick={handleNavigateToWorkouts}>
+                Past Workouts
+              </MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>

@@ -3,7 +3,7 @@ export async function onRequest(context) {
     context.request.url === "http://localhost:8788/api/workout/updateWorkout";
 
   const body = await context.request.json();
-  const { workout_id, workout_text } = body;
+  const { workout_id, workout_title } = body;
 
   const workerUrl = isLocal
     ? "http://localhost:8787"
@@ -17,7 +17,7 @@ export async function onRequest(context) {
       "Content-Type": "application/json",
       Authorization: context.request.headers.get("Authorization"),
     },
-    body: JSON.stringify({ workout_id, workout_text }),
+    body: JSON.stringify({ workout_id, workout_title }),
   };
 
   try {

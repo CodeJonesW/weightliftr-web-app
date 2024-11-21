@@ -84,6 +84,7 @@ const ViewWorkouts = () => {
   };
 
   const handleShowWorkout = (workout_id) => {
+    localStorage.setItem("workout_id", workout_id);
     dispatch(setCurrentWorkout(workout_id));
     navigate(`/`);
   };

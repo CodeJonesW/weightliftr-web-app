@@ -56,10 +56,10 @@ export const getWorkout = createAsyncThunk(
 
 export const updateWorkout = createAsyncThunk(
   "workout/updateWorkout",
-  async ({ workout_id, workout_text, token }) => {
+  async ({ workout_id, workout_title, token }) => {
     const response = await axios.post(
       `/api/workout/updateWorkout`,
-      { workout_id, workout_text },
+      { workout_id, workout_title },
       {
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const updateWorkout = createAsyncThunk(
         },
       }
     );
-    return response.data;
+    return { workout_title };
   }
 );
 
@@ -83,6 +83,9 @@ const workoutSlice = createSlice({
     setCurrentWorkout: (state, action) => {
       state.workout_id = action.payload;
     },
+    setWorkoutTitle: (state, action) => {
+      state.workout.workout_title = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -91,6 +94,7 @@ const workoutSlice = createSlice({
       })
       .addCase(createWorkout.fulfilled, (state, action) => {
         state.workout_id = action.payload.workout_id;
+        localStorage.setItem("workout_id", action.payload.workout_id);
         state.loading = false;
       })
       .addCase(createWorkout.rejected, (state, action) => {
@@ -103,6 +107,8 @@ const workoutSlice = createSlice({
       .addCase(deleteWorkout.fulfilled, (state) => {
         state.workout_id = null;
         state.loading = false;
+        state.workout = null;
+        localStorage.removeItem("workout_id");
       })
       .addCase(deleteWorkout.rejected, (state) => {
         state.error = true;
@@ -124,7 +130,7 @@ const workoutSlice = createSlice({
       })
       .addCase(updateWorkout.fulfilled, (state, action) => {
         state.loading = false;
-        state.workout = action.payload;
+        state.workout.meta.title = action.payload;
       })
       .addCase(updateWorkout.rejected, (state) => {
         state.error = true;
@@ -133,6 +139,6 @@ const workoutSlice = createSlice({
   },
 });
 
-export const { setCurrentWorkout } = workoutSlice.actions;
+export const { setCurrentWorkout, setWorkoutTitle } = workoutSlice.actions;
 
 export default workoutSlice;

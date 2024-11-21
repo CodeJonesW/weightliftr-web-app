@@ -7,6 +7,7 @@ import {
   IconButton,
   Typography,
   Divider,
+  TextField,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
@@ -17,11 +18,13 @@ import {
   deleteWorkout,
   getWorkout,
   setCurrentWorkout,
+  setWorkoutTitle,
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import Exercise from "./Exercise";
 import axios from "axios";
+import WorkoutTitle from "./WorkoutTitle";
 
 const Workout = () => {
   const theme = useTheme();
@@ -58,7 +61,7 @@ const Workout = () => {
   };
 
   const handleAddExerciseToWorkout = async (exercise) => {
-    const result = await axios.post(
+    await axios.post(
       "api/exercise/createExercise",
       {
         workout_id,
@@ -73,8 +76,6 @@ const Workout = () => {
     );
     const savedExercise = `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
     setWorkoutExercises([...workoutExercises, savedExercise]);
-
-    console.log("result", result);
   };
 
   return (
@@ -102,15 +103,18 @@ const Workout = () => {
               borderRadius: "10px",
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                paddingBottom: "16px",
-              }}
-            >
-              {workout_id ? (
+            {workout ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  paddingBottom: "16px",
+                }}
+              >
+                <Box>
+                  <WorkoutTitle workoutTitle={workout.meta.workout_title} />
+                </Box>
                 <Box>
                   <IconButton onClick={handleFinishWorkout}>
                     <SaveIcon color="text.secondary" />
@@ -122,8 +126,9 @@ const Workout = () => {
                     <DeleteIcon />
                   </IconButton>
                 </Box>
-              ) : null}
-            </Box>
+              </Box>
+            ) : null}
+
             {!workout_id ? (
               <Button
                 onClick={handleCreateWorkout}
