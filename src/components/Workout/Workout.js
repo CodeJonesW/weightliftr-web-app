@@ -31,6 +31,8 @@ const Workout = () => {
   const { workout_id, workout } = useSelector((state) => state.workoutSlice);
   const [workoutExercises, setWorkoutExercises] = useState([]);
 
+  console.log("WORKOUT", workout);
+
   useEffect(() => {
     if (workout_id) {
       dispatch(getWorkout({ token, workout_id }));
@@ -111,7 +113,7 @@ const Workout = () => {
                 }}
               >
                 <Box>
-                  <WorkoutTitle workoutTitle={workout.meta.workout_title} />
+                  <WorkoutTitle />
                 </Box>
                 <Box>
                   <IconButton onClick={handleFinishWorkout}>

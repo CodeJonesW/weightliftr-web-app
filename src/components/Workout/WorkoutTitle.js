@@ -3,11 +3,13 @@ import { Typography, TextField } from "@mui/material";
 import { updateWorkout } from "../../redux/slices/workoutSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const WorkoutTitle = ({ workoutTitle }) => {
+const WorkoutTitle = () => {
   const dispatch = useDispatch();
   const { workout } = useSelector((state) => state.workoutSlice);
   const { token } = useSelector((state) => state.authSlice);
-  const [title, setTitle] = useState(workoutTitle);
+  const [title, setTitle] = useState(
+    workout?.meta?.workout_text ? workout.meta.workout_text : ""
+  );
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {
