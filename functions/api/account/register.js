@@ -36,10 +36,12 @@ export async function onRequest({ request, env }) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.log("errror", error);
-    return new Response(JSON.stringify({ error: "Failed to register user" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to register user", details: error }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
