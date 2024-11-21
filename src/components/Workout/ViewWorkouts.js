@@ -111,6 +111,7 @@ const ViewWorkouts = () => {
             borderRadius: "16px",
             maxWidth: "300px",
             height: "80%",
+            overflow: "scroll",
           }}
         >
           <Box
@@ -150,11 +151,12 @@ const ViewWorkouts = () => {
           <List>
             {workouts.length > 0 ? (
               workouts.map((workout, index) => (
-                <ListItem
-                  onClick={() => handleShowWorkout(workout.workout_id)}
-                  key={workout.workout_id}
-                >
-                  <Typography>{workout.created_at}</Typography>
+                <ListItem key={workout.workout_id}>
+                  <Typography
+                    onClick={() => handleShowWorkout(workout.workout_id)}
+                  >
+                    {workout.created_at}
+                  </Typography>
                   {showDeleteButton ? (
                     <IconButton>
                       <DeleteIcon
