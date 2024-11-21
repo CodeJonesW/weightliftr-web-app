@@ -18,7 +18,6 @@ import {
   deleteWorkout,
   getWorkout,
   setCurrentWorkout,
-  setWorkoutTitle,
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";

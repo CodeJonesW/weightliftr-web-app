@@ -57,7 +57,7 @@ export const getWorkout = createAsyncThunk(
 export const updateWorkout = createAsyncThunk(
   "workout/updateWorkout",
   async ({ workout_id, workout_title, token }) => {
-    const response = await axios.post(
+    await axios.post(
       `/api/workout/updateWorkout`,
       { workout_id, workout_title },
       {
@@ -83,9 +83,6 @@ const workoutSlice = createSlice({
     setCurrentWorkout: (state, action) => {
       state.workout_id = action.payload;
       localStorage.setItem("workout_id", action.payload);
-    },
-    setWorkoutTitle: (state, action) => {
-      state.workout.workout_title = action.payload;
     },
   },
   extraReducers: (builder) => {
