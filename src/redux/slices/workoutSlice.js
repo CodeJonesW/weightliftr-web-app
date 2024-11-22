@@ -86,6 +86,7 @@ const workoutSlice = createSlice({
         localStorage.setItem("workout_id", action.payload);
       } else {
         localStorage.removeItem("workout_id");
+        state.workout = null;
       }
     },
   },
