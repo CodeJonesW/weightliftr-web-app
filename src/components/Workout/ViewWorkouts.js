@@ -111,7 +111,7 @@ const ViewWorkouts = () => {
             borderRadius: "16px",
             maxWidth: "300px",
             height: "80%",
-            overflow: "scroll",
+            overflowY: "hidden",
           }}
         >
           <Box
