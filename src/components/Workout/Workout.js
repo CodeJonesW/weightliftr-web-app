@@ -16,7 +16,7 @@ import {
   createWorkout,
   deleteWorkout,
   getWorkout,
-  setCurrentWorkout,
+  clearCurrentWorkout,
 } from "../../redux/slices/workoutSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
@@ -30,8 +30,6 @@ const Workout = () => {
   const { token } = useSelector((state) => state.authSlice);
   const { workout_id, workout } = useSelector((state) => state.workoutSlice);
   const [workoutExercises, setWorkoutExercises] = useState([]);
-
-  console.log("WORKOUT", workout);
 
   useEffect(() => {
     if (workout_id) {
@@ -57,7 +55,7 @@ const Workout = () => {
   };
 
   const handleFinishWorkout = () => {
-    dispatch(setCurrentWorkout(null));
+    dispatch(clearCurrentWorkout());
   };
 
   const handleAddExerciseToWorkout = async (exercise) => {

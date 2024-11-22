@@ -82,12 +82,12 @@ const workoutSlice = createSlice({
   reducers: {
     setCurrentWorkout: (state, action) => {
       state.workout_id = action.payload;
-      if (action.payload) {
-        localStorage.setItem("workout_id", action.payload);
-      } else {
-        localStorage.removeItem("workout_id");
-        state.workout = null;
-      }
+      localStorage.setItem("workout_id", action.payload);
+    },
+    clearCurrentWorkout: (state) => {
+      state.workout_id = null;
+      state.workout = null;
+      localStorage.removeItem("workout_id");
     },
   },
   extraReducers: (builder) => {

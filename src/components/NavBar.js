@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { clearAuthToken } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { setCurrentWorkout } from "../redux/slices/workoutSlice";
+import { clearCurrentWorkout } from "../redux/slices/workoutSlice";
 
 const NavBar = ({ isMenuDisabled }) => {
   const dispatch = useDispatch();
@@ -36,17 +36,18 @@ const NavBar = ({ isMenuDisabled }) => {
 
   const handleLogout = () => {
     dispatch(clearAuthToken());
+    dispatch(clearCurrentWorkout());
     navigate("/welcome");
   };
 
   const handleNavigateToWorkouts = () => {
     dispatch(getProfile({ token }));
-    localStorage.removeItem("workout_id");
+    dispatch(clearCurrentWorkout());
     navigate("/workouts");
   };
 
   const handleCreateWorkout = () => {
-    dispatch(setCurrentWorkout(null));
+    dispatch(clearCurrentWorkout());
     navigate("/");
   };
 
