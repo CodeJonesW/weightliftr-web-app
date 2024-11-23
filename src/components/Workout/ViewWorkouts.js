@@ -143,48 +143,43 @@ const ViewWorkouts = () => {
           </Box>
           <Box>
             {workouts.length > 0
-              ? workouts.map(
-                  (workout, index) => (
-                    console.log(workout),
-                    (
-                      <Card
-                        key={workout.workout_id}
-                        style={{
-                          padding: "20px",
-                          borderRadius: "16px",
-                          maxWidth: "300px",
-                          height: "200px",
+              ? workouts.map((workout, index) =>
+                  console.log(workout)(
+                    <Card
+                      key={workout.workout_id}
+                      style={{
+                        padding: "20px",
+                        borderRadius: "16px",
+                        maxWidth: "300px",
+                        height: "200px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "flex-end",
                         }}
                       >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-end",
-                          }}
-                        >
-                          <ArrowCircleRightIcon
+                        <ArrowCircleRightIcon
+                          onClick={() => handleShowWorkout(workout.workout_id)}
+                        />
+                      </Box>
+                      <Box>
+                        <Typography>{workout.workout_text}</Typography>
+                        <Typography>{workout.created_at}</Typography>
+                      </Box>
+
+                      {showDeleteButton ? (
+                        <IconButton>
+                          <DeleteIcon
                             onClick={() =>
-                              handleShowWorkout(workout.workout_id)
+                              handleOpenDeleteDialog(workout.workout_id)
                             }
                           />
-                        </Box>
-                        <Box>
-                          <Typography>{workout.workout_text}</Typography>
-                          <Typography>{workout.created_at}</Typography>
-                        </Box>
-
-                        {showDeleteButton ? (
-                          <IconButton>
-                            <DeleteIcon
-                              onClick={() =>
-                                handleOpenDeleteDialog(workout.workout_id)
-                              }
-                            />
-                          </IconButton>
-                        ) : null}
-                      </Card>
-                    )
+                        </IconButton>
+                      ) : null}
+                    </Card>
                   )
                 )
               : null}
