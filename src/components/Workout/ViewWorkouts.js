@@ -3,7 +3,6 @@ import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Card,
-  List,
   Dialog,
   DialogActions,
   DialogContent,
@@ -14,7 +13,6 @@ import {
   MenuItem,
   Typography,
   IconButton,
-  ListItem,
 } from "@mui/material";
 import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
