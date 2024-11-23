@@ -60,7 +60,12 @@ const Workout = () => {
   };
 
   const handleFinishWorkout = () => {
-    dispatch(clearCurrentWorkout());
+    try {
+      dispatch(clearCurrentWorkout());
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to finish workout:", error);
+    }
   };
 
   const handleAddExerciseToWorkout = async (exercise) => {
