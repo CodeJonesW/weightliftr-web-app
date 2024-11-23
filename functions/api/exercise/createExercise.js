@@ -1,4 +1,5 @@
 export async function onRequest(context) {
+  console.log("createExercise.js onRequest", context.request.url);
   const isLocal =
     context.request.url === "http://localhost:8788/api/exercise/createExercise";
 

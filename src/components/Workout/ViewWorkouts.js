@@ -16,6 +16,7 @@ import {
   IconButton,
   ListItem,
 } from "@mui/material";
+import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../redux/slices/profileSlice";
 import { setCurrentWorkout } from "../../redux/slices/workoutSlice";
@@ -90,117 +91,136 @@ const ViewWorkouts = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
+    <Box sx={{ width: "100%", height: "100%" }}>
       <Box
+        className="main"
         sx={{
-          padding: "24px",
-          height: "100vh",
-          width: "100vw",
-          justifyContent: "center",
+          width: "100%",
+          height: "100%",
           display: "flex",
-          backgroundColor: theme.palette.background.default,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          overflow: "scroll",
+          background: theme.palette.background.default,
         }}
       >
-        <Card
-          style={{
-            padding: "20px",
-            borderRadius: "16px",
-            maxWidth: "300px",
-            height: "80%",
-            overflowY: "hidden",
-          }}
+        <Box style={{ width: "100%", paddingBottom: "24px" }}>
+          <NavBar />
+        </Box>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <Box
             sx={{
+              padding: "24px",
+              height: "100vh",
+              width: "100vw",
+              justifyContent: "center",
               display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
+              backgroundColor: theme.palette.background.default,
             }}
           >
-            <Typography variant={"h6"}>Past Workouts</Typography>
-            <Box>
-              <IconButton
-                size="small"
-                id="basic-button"
-                aria-controls={isEditMenuOpen ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={isEditMenuOpen ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={isEditMenuOpen}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
+            <Card
+              style={{
+                padding: "20px",
+                borderRadius: "16px",
+                maxWidth: "300px",
+                height: "80%",
+                overflowY: "hidden",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                 }}
               >
-                <MenuItem onClick={handleEdit}>Edit</MenuItem>
-              </Menu>
-            </Box>
-          </Box>
-
-          <List>
-            {workouts.length > 0 ? (
-              workouts.map((workout, index) => (
-                <ListItem key={workout.workout_id}>
-                  <Typography
-                    onClick={() => handleShowWorkout(workout.workout_id)}
+                <Typography variant={"h6"}>Past Workouts</Typography>
+                <Box>
+                  <IconButton
+                    size="small"
+                    id="basic-button"
+                    aria-controls={isEditMenuOpen ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={isEditMenuOpen ? "true" : undefined}
+                    onClick={handleClick}
                   >
-                    {workout.created_at}
-                  </Typography>
-                  {showDeleteButton ? (
-                    <IconButton>
-                      <DeleteIcon
-                        onClick={() =>
-                          handleOpenDeleteDialog(workout.workout_id)
-                        }
-                      />
-                    </IconButton>
-                  ) : null}
-                </ListItem>
-              ))
-            ) : (
-              <p>No workouts saved</p>
-            )}
-          </List>
-        </Card>
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={isEditMenuOpen}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem onClick={handleEdit}>Edit</MenuItem>
+                  </Menu>
+                </Box>
+              </Box>
 
-        <Dialog
-          sx={{ borderRadius: "16px" }}
-          open={open}
-          onClose={handleCloseDialog}
-        >
-          <DialogTitle>Delete Goal</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Are you sure you want to delete this workout? This action cannot
-              be undone.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" onClick={handleCloseDialog}>
-              Cancel
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={handleDeleteWorkout}
-              color="error"
+              <List>
+                {workouts.length > 0 ? (
+                  workouts.map((workout, index) => (
+                    <ListItem key={workout.workout_id}>
+                      <Typography
+                        onClick={() => handleShowWorkout(workout.workout_id)}
+                      >
+                        {workout.created_at}
+                      </Typography>
+                      {showDeleteButton ? (
+                        <IconButton>
+                          <DeleteIcon
+                            onClick={() =>
+                              handleOpenDeleteDialog(workout.workout_id)
+                            }
+                          />
+                        </IconButton>
+                      ) : null}
+                    </ListItem>
+                  ))
+                ) : (
+                  <p>No workouts saved</p>
+                )}
+              </List>
+            </Card>
+
+            <Dialog
+              sx={{ borderRadius: "16px" }}
+              open={open}
+              onClose={handleCloseDialog}
             >
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
+              <DialogTitle>Delete Goal</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Are you sure you want to delete this workout? This action
+                  cannot be undone.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button variant="contained" onClick={handleCloseDialog}>
+                  Cancel
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={handleDeleteWorkout}
+                  color="error"
+                >
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
+        </motion.div>
       </Box>
-    </motion.div>
+    </Box>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, TextField, Typography, IconButton } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
+
 const Exercise = ({ addExercise }) => {
   const [reps, setReps] = useState("");
   const [sets, setSets] = useState("");

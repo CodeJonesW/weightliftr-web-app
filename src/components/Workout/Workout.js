@@ -23,12 +23,16 @@ import SaveIcon from "@mui/icons-material/Save";
 import Exercise from "./Exercise";
 import axios from "axios";
 import WorkoutTitle from "./WorkoutTitle";
+import NavBar from "../NavBar";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Workout = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authSlice);
-  const { workout_id, workout } = useSelector((state) => state.workoutSlice);
+  const { workout_id } = useParams();
+  const { workout } = useSelector((state) => state.workoutSlice);
   const [workoutExercises, setWorkoutExercises] = useState([]);
 
   useEffect(() => {
@@ -46,12 +50,13 @@ const Workout = () => {
     }
   }, [workout]);
 
-  const handleCreateWorkout = async () => {
-    dispatch(createWorkout({ token }));
-  };
-
   const handleDeleteWorkout = async () => {
-    dispatch(deleteWorkout({ token, workout_id }));
+    try {
+      await dispatch(deleteWorkout({ token, workout_id }));
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to delete workout:", error);
+    }
   };
 
   const handleFinishWorkout = () => {
@@ -59,8 +64,8 @@ const Workout = () => {
   };
 
   const handleAddExerciseToWorkout = async (exercise) => {
-    await axios.post(
-      "api/exercise/createExercise",
+    const result = await axios.post(
+      `/api/exercise/createExercise`,
       {
         workout_id,
         exercise,
@@ -72,99 +77,110 @@ const Workout = () => {
         },
       }
     );
+    console.log(result);
     const savedExercise = `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
     setWorkoutExercises([...workoutExercises, savedExercise]);
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      <Grid
-        container
-        sx={{ height: "80vh" }}
-        alignItems="center"
-        justifyContent="center"
+    <Box sx={{ width: "100%", height: "100%" }}>
+      <Box
+        className="main"
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          overflow: "scroll",
+          background: theme.palette.background.default,
+        }}
       >
-        <Grid item xs={12} sm={8} md={6} sx={{ height: "100%" }}>
-          <Card
-            sx={{
-              height: "90%",
-              width: "300px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              padding: "24px",
-              backgroundColor: theme.palette.background.paper,
-              borderRadius: "10px",
-            }}
+        <Box style={{ width: "100%", paddingBottom: "24px" }}>
+          <NavBar />
+        </Box>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Grid
+            container
+            sx={{ height: "80vh" }}
+            alignItems="center"
+            justifyContent="center"
           >
-            {workout ? (
-              <Box
+            <Grid item xs={12} sm={8} md={6} sx={{ height: "100%" }}>
+              <Card
                 sx={{
+                  height: "90%",
+                  width: "300px",
                   display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  paddingBottom: "16px",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  padding: "24px",
+                  backgroundColor: theme.palette.background.paper,
+                  borderRadius: "10px",
                 }}
               >
-                <Box>
-                  <WorkoutTitle />
-                </Box>
-                <Box>
-                  <IconButton onClick={handleFinishWorkout}>
-                    <SaveIcon color="text.secondary" />
-                  </IconButton>
-                  <IconButton
-                    color="text.secondary"
-                    onClick={handleDeleteWorkout}
+                {workout ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingBottom: "16px",
+                    }}
                   >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
-              </Box>
-            ) : null}
+                    <Box>
+                      <WorkoutTitle />
+                    </Box>
+                    <Box>
+                      <IconButton onClick={handleFinishWorkout}>
+                        <SaveIcon color="text.secondary" />
+                      </IconButton>
+                      <IconButton
+                        color="text.secondary"
+                        onClick={handleDeleteWorkout}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                ) : null}
 
-            {!workout_id ? (
-              <Button
-                onClick={handleCreateWorkout}
-                variant="contained"
-                size="large"
-              >
-                <AddCircleOutlineIcon />
-              </Button>
-            ) : (
-              <Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
-                >
-                  {workoutExercises.map((exercise, index) => {
-                    return (
-                      <Typography key={index} variant="body1">
-                        {exercise}
-                      </Typography>
-                    );
-                  })}
-                </Box>
-                <Box sx={{ paddingTop: "8px", paddingBottom: "16px" }}>
-                  <Divider />
-                </Box>
                 <Box>
-                  <Exercise addExercise={handleAddExerciseToWorkout} />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      textAlign: "center",
+                    }}
+                  >
+                    {workoutExercises.map((exercise, index) => {
+                      return (
+                        <Typography key={index} variant="body1">
+                          {exercise}
+                        </Typography>
+                      );
+                    })}
+                  </Box>
+                  <Box sx={{ paddingTop: "8px", paddingBottom: "16px" }}>
+                    <Divider />
+                  </Box>
+                  <Box>
+                    <Exercise addExercise={handleAddExerciseToWorkout} />
+                  </Box>
                 </Box>
-              </Box>
-            )}
-          </Card>
-        </Grid>
-      </Grid>
-    </motion.div>
+              </Card>
+            </Grid>
+          </Grid>
+        </motion.div>
+      </Box>
+    </Box>
   );
 };
 
