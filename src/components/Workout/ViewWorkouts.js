@@ -3,7 +3,6 @@ import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Card,
-  List,
   Dialog,
   DialogActions,
   DialogContent,
@@ -14,14 +13,18 @@ import {
   MenuItem,
   Typography,
   IconButton,
-  ListItem,
 } from "@mui/material";
+import NavBar from "../NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../redux/slices/profileSlice";
-import { setCurrentWorkout } from "../../redux/slices/workoutSlice";
+import {
+  setCurrentWorkout,
+  deleteWorkout,
+} from "../../redux/slices/workoutSlice";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewWorkouts = () => {
@@ -38,22 +41,11 @@ const ViewWorkouts = () => {
     if (!workoutToDelete) return;
 
     try {
-      await fetch("/api/workout/deleteWorkout", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          workout_id: workoutToDelete,
-        }),
-      });
+      dispatch(deleteWorkout({ token, workout_id: workoutToDelete }));
+      dispatch(getProfile({ token }));
     } catch (error) {
       console.error("Failed to delete workout", error);
     }
-
-    dispatch(getProfile({ token }));
-
     setOpen(false);
     setWorkoutToDelete(null);
   };
@@ -90,39 +82,41 @@ const ViewWorkouts = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
+    <Box sx={{ width: "100%", height: "100%" }}>
       <Box
+        className="main"
         sx={{
-          padding: "24px",
-          height: "100vh",
-          width: "100vw",
-          justifyContent: "center",
+          width: "100%",
+          height: "100%",
           display: "flex",
-          backgroundColor: theme.palette.background.default,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          overflow: "scroll",
+          background: theme.palette.background.default,
         }}
       >
-        <Card
-          style={{
-            padding: "20px",
-            borderRadius: "16px",
-            maxWidth: "300px",
-            height: "80%",
-            overflowY: "hidden",
-          }}
+        <Box style={{ width: "100%", paddingBottom: "24px" }}>
+          <NavBar />
+        </Box>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          sx={{ width: "100%", height: "100%" }}
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "center",
               justifyContent: "space-between",
+              width: "100%",
+              paddingBottom: "24px",
             }}
           >
-            <Typography variant={"h6"}>Past Workouts</Typography>
+            <Typography color="text.secondary" variant={"h6"}>
+              Past Workouts
+            </Typography>
             <Box>
               <IconButton
                 size="small"
@@ -147,60 +141,78 @@ const ViewWorkouts = () => {
               </Menu>
             </Box>
           </Box>
+          <Box>
+            {workouts.length > 0
+              ? workouts.map((workout, index) =>
+                  console.log(workout)(
+                    <Card
+                      key={workout.workout_id}
+                      style={{
+                        padding: "20px",
+                        borderRadius: "16px",
+                        maxWidth: "300px",
+                        height: "200px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "flex-end",
+                        }}
+                      >
+                        <ArrowCircleRightIcon
+                          onClick={() => handleShowWorkout(workout.workout_id)}
+                        />
+                      </Box>
+                      <Box>
+                        <Typography>{workout.workout_text}</Typography>
+                        <Typography>{workout.created_at}</Typography>
+                      </Box>
 
-          <List>
-            {workouts.length > 0 ? (
-              workouts.map((workout, index) => (
-                <ListItem key={workout.workout_id}>
-                  <Typography
-                    onClick={() => handleShowWorkout(workout.workout_id)}
-                  >
-                    {workout.created_at}
-                  </Typography>
-                  {showDeleteButton ? (
-                    <IconButton>
-                      <DeleteIcon
-                        onClick={() =>
-                          handleOpenDeleteDialog(workout.workout_id)
-                        }
-                      />
-                    </IconButton>
-                  ) : null}
-                </ListItem>
-              ))
-            ) : (
-              <p>No workouts saved</p>
-            )}
-          </List>
-        </Card>
+                      {showDeleteButton ? (
+                        <IconButton>
+                          <DeleteIcon
+                            onClick={() =>
+                              handleOpenDeleteDialog(workout.workout_id)
+                            }
+                          />
+                        </IconButton>
+                      ) : null}
+                    </Card>
+                  )
+                )
+              : null}
+          </Box>
 
-        <Dialog
-          sx={{ borderRadius: "16px" }}
-          open={open}
-          onClose={handleCloseDialog}
-        >
-          <DialogTitle>Delete Goal</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Are you sure you want to delete this workout? This action cannot
-              be undone.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" onClick={handleCloseDialog}>
-              Cancel
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={handleDeleteWorkout}
-              color="error"
-            >
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
+          <Dialog
+            sx={{ borderRadius: "16px" }}
+            open={open}
+            onClose={handleCloseDialog}
+          >
+            <DialogTitle>Delete Goal</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to delete this workout? This action cannot
+                be undone.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button variant="contained" onClick={handleCloseDialog}>
+                Cancel
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={handleDeleteWorkout}
+                color="error"
+              >
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </motion.div>
       </Box>
-    </motion.div>
+    </Box>
   );
 };
 

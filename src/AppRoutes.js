@@ -9,6 +9,7 @@ import {
   PrivateRoute,
   TermsOfService,
   PrivacyPolicy,
+  Workout,
 } from "./components/index.js";
 import App from "./App.js";
 import ViewWorkouts from "./components/Workout/ViewWorkouts";
@@ -36,10 +37,10 @@ function AppRoutes() {
           path="/workouts"
           element={<PrivateRoute element={<ViewWorkouts />} />}
         />
-        {/* <Route
-          path="/goal/:goal_id"
-          element={<PrivateRoute element={<ViewGoal />} />}
-        /> */}
+        <Route
+          path="/workout/:workout_id"
+          element={<PrivateRoute element={<Workout />} />}
+        />
       </Routes>
     </Router>
   );

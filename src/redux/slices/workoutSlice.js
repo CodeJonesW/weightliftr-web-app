@@ -142,6 +142,7 @@ const workoutSlice = createSlice({
   },
 });
 
-export const { setCurrentWorkout, setWorkoutTitle } = workoutSlice.actions;
+export const { setCurrentWorkout, setWorkoutTitle, clearCurrentWorkout } =
+  workoutSlice.actions;
 
 export default workoutSlice;
