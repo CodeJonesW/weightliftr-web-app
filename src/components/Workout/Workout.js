@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Button,
   Card,
   Grid,
   IconButton,
@@ -10,10 +9,8 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createWorkout,
   deleteWorkout,
   getWorkout,
   clearCurrentWorkout,
