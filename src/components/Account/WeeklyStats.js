@@ -8,20 +8,21 @@ const WeeklyStats = () => {
   const theme = useTheme();
   const [totalWeightMoved, setTotalWeightMoved] = useState("");
   const { token } = useSelector((state) => state.authSlice);
-  const handleGetWeeklyStats = async () => {
-    const result = await axios.get("/api/account/weeklyStats", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(result);
-    setTotalWeightMoved(result.data.total_weight_moved);
-  };
 
   useEffect(() => {
-    handleGetWeeklyStats();
-  }, []);
+    const fetchWeeklyStats = async () => {
+      const result = await axios.get("/api/account/weeklyStats", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(result);
+      setTotalWeightMoved(result.data.total_weight_moved);
+    };
+
+    fetchWeeklyStats();
+  }, [token]);
 
   return (
     <Box sx={{ padding: "64px" }}>
