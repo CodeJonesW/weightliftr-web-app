@@ -1,15 +1,13 @@
 export async function onRequest(context) {
+  console.log(context.request.url);
   const isLocal =
-    context.request.url === "http://localhost:8788/api/workout/getWorkout";
-
-  const body = await context.request.json();
-  const { workout_id } = body;
+    context.request.url === "http://localhost:8788/api/account/weeklyStats";
 
   const workerUrl = isLocal
     ? "http://localhost:8787"
     : "https://weightliftr-worker.williamjonescodes.workers.dev";
 
-  const url = `${workerUrl}/api/workout?workout_id=${workout_id}`;
+  const url = `${workerUrl}/api/weekly-stats`;
 
   const init = {
     method: "GET",
@@ -23,15 +21,19 @@ export async function onRequest(context) {
     const response = await fetch(url, init);
     const data = await response.json();
     console.log(data);
+
     return new Response(JSON.stringify(data), {
       status: response.status,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     console.log(error);
-    return new Response(JSON.stringify({ error: "Failed to get workout" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to get weekly stats" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }

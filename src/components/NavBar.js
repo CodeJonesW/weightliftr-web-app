@@ -46,7 +46,7 @@ const NavBar = ({ isMenuDisabled }) => {
     navigate("/workouts");
   };
 
-  const handleCreateWorkout = () => {
+  const handleNavigateHome = () => {
     dispatch(clearCurrentWorkout());
     navigate("/");
   };
@@ -93,7 +93,7 @@ const NavBar = ({ isMenuDisabled }) => {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={handleCreateWorkout}>Create Workout</MenuItem>
+              <MenuItem onClick={handleNavigateHome}>Home</MenuItem>
               <MenuItem onClick={handleNavigateToWorkouts}>
                 Past Workouts
               </MenuItem>
