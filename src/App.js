@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import "./App.css";
 import { NavBar } from "./components/index.js";
 import { useTheme } from "@mui/material/styles";
-import CreateWorkout from "./components/Workout/CreateWorkout.js";
+import Home from "./components/Account/Home.js";
 
 const App = () => {
   const theme = useTheme();
@@ -26,7 +26,7 @@ const App = () => {
         <Box style={{ width: "100%", paddingBottom: "24px" }}>
           <NavBar />
         </Box>
-        <CreateWorkout />
+        <Home />
       </Box>
     </Box>
   );

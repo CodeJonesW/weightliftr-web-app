@@ -8,4 +8,4 @@ export { default as BackButton } from "./BackButton";
 export { default as TermsOfService } from "./Onboarding/TermsOfService";
 export { default as PrivacyPolicy } from "./Onboarding/PrivacyPolicy";
 export { default as Workout } from "./Workout/Workout";
-export { default as CreateWorkout } from "./Workout/CreateWorkout";
+export { default as Home } from "./Account/Home";

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { Button, Grid } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useDispatch, useSelector } from "react-redux";
 import { createWorkout } from "../../redux/slices/workoutSlice";
 import { useNavigate } from "react-router-dom";
+import WeeklyStats from "./WeeklyStats";
 
 const Workout = () => {
   const navigate = useNavigate();
@@ -28,22 +29,28 @@ const Workout = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <Grid
-        container
-        sx={{ height: "80vh" }}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Grid item xs={12} sm={8} md={6} sx={{ height: "100%" }}>
+      <Box sx={{ display: "flex", height: "80vh", width: "100vw" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justfiyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            padding: "16px",
+          }}
+        >
           <Button
             onClick={handleCreateWorkout}
             variant="contained"
             size="large"
+            sx={{ maxWidth: "64px" }}
           >
             <AddCircleOutlineIcon />
           </Button>
-        </Grid>
-      </Grid>
+          <WeeklyStats />
+        </Box>
+      </Box>
     </motion.div>
   );
 };
