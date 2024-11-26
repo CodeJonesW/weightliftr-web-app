@@ -7,6 +7,7 @@ import { useTheme } from "@mui/material/styles";
 const WeeklyStats = () => {
   const theme = useTheme();
   const [totalWeightMoved, setTotalWeightMoved] = useState("");
+  const [totalReps, setTotalReps] = useState("");
   const { token } = useSelector((state) => state.authSlice);
 
   useEffect(() => {
@@ -19,25 +20,37 @@ const WeeklyStats = () => {
       });
       console.log(result);
       setTotalWeightMoved(result.data.total_weight_moved);
+      setTotalReps(result.data.total_reps);
     };
 
     fetchWeeklyStats();
   }, [token]);
 
   return (
-    <Box sx={{ padding: "64px" }}>
+    <Box sx={{ padding: "24px" }}>
       <Card
         style={{
           padding: "20px",
           borderRadius: "16px",
-          maxWidth: "300px",
+          width: "300px",
           height: "200px",
           backgroundColor: theme.palette.background.paper,
         }}
       >
         <Typography variant="h6">Weekly Stats</Typography>
         <Box sx={{ paddingTop: "16px" }}>
-          <Typography>Total Weight Moved: {totalWeightMoved}</Typography>
+          <Typography variant="body1">
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              {totalWeightMoved} lbs
+            </Typography>
+            have moved this week.
+          </Typography>
+          <Typography variant="body1">
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              {totalReps}
+            </Typography>
+            total reps this week.
+          </Typography>
         </Box>
       </Card>
     </Box>
