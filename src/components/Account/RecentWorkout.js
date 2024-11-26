@@ -1,4 +1,4 @@
-import { Button, Box, Typography, Card } from "@mui/material";
+import { Box, Typography, Card } from "@mui/material";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWorkout } from "../../redux/slices/workoutSlice";
