@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createWorkout } from "../../redux/slices/workoutSlice";
 import { useNavigate } from "react-router-dom";
 import WeeklyStats from "./WeeklyStats";
+import RecentWorkout from "./RecentWorkout";
 
 const Workout = () => {
   const navigate = useNavigate();
@@ -37,18 +38,18 @@ const Workout = () => {
             justfiyContent: "center",
             alignItems: "center",
             width: "100%",
-            padding: "16px",
           }}
         >
           <Button
             onClick={handleCreateWorkout}
             variant="contained"
             size="large"
-            sx={{ maxWidth: "64px" }}
+            sx={{ maxWidth: "150px", height: "64px" }}
           >
             <AddCircleOutlineIcon />
           </Button>
           <WeeklyStats />
+          <RecentWorkout />
         </Box>
       </Box>
     </motion.div>
