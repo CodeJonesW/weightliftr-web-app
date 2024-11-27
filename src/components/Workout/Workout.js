@@ -108,7 +108,7 @@ const Workout = () => {
       }
     );
     console.log(result);
-    const savedRow = `${row.rowDistance}m in ${row.rowTime}`;
+    const savedRow = `${row.rowDistance}m row in ${row.rowTime}`;
     setWorkoutExercises([...workoutExercises, savedRow]);
   };
 
