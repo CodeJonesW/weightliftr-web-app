@@ -43,7 +43,15 @@ const Workout = () => {
       const parsedExercises = workout.exercises.map((exercise) => {
         return `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
       });
-      setWorkoutExercises(parsedExercises);
+
+      if (workout.rows.length > 0) {
+        const parsedRows = workout.rows.map((row) => {
+          return `${row.distance}m row in ${row.time}`;
+        });
+        setWorkoutExercises([...parsedExercises, ...parsedRows]);
+      } else {
+        setWorkoutExercises(parsedExercises);
+      }
     }
   }, [workout]);
 
@@ -82,6 +90,26 @@ const Workout = () => {
     console.log(result);
     const savedExercise = `${exercise.reps} X ${exercise.sets} ${exercise.name} @ ${exercise.weight}`;
     setWorkoutExercises([...workoutExercises, savedExercise]);
+  };
+
+  const handleAddRowToWorkout = async (row) => {
+    console.log("row", row);
+    const result = await axios.post(
+      `/api/exercise/createRow`,
+      {
+        workout_id,
+        row,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(result);
+    const savedRow = `${row.rowDistance}m in ${row.rowTime}`;
+    setWorkoutExercises([...workoutExercises, savedRow]);
   };
 
   return (
@@ -174,7 +202,10 @@ const Workout = () => {
                     <Divider />
                   </Box>
                   <Box>
-                    <Exercise addExercise={handleAddExerciseToWorkout} />
+                    <Exercise
+                      addRow={handleAddRowToWorkout}
+                      addExercise={handleAddExerciseToWorkout}
+                    />
                   </Box>
                 </Box>
               </Card>
