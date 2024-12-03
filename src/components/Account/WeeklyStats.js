@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTheme } from "@mui/material/styles";
-
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 const WeeklyStats = () => {
   const theme = useTheme();
   const [totalWeightMoved, setTotalWeightMoved] = useState("");
@@ -37,7 +37,17 @@ const WeeklyStats = () => {
           backgroundColor: theme.palette.background.paper,
         }}
       >
-        <Typography variant="h6">Weekly Stats</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        >
+          <AnalyticsIcon sx={{ paddingRight: "8px" }} />
+          <Typography variant="h6">Weekly Stats</Typography>
+        </Box>
+
         <Box sx={{ paddingTop: "16px" }}>
           <Typography variant="body1">
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
