@@ -55,12 +55,20 @@ const RecentWorkout = () => {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h6">Recent Workout</Typography>
+        <Typography sx={{ paddingBottom: "16px" }} variant="h6">
+          Recent Workout
+        </Typography>
         <ArrowCircleRightIcon
           onClick={() => handleShowWorkout(latestWorkout.workout_id)}
         />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         <Typography>{latestWorkout.workout_text}</Typography>
         <Typography>{latestWorkout.created_at}</Typography>
       </Box>
