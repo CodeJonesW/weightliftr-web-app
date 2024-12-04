@@ -8,6 +8,7 @@ const WeeklyStats = () => {
   const theme = useTheme();
   const [totalWeightMoved, setTotalWeightMoved] = useState("");
   const [totalReps, setTotalReps] = useState("");
+  const [totalSets, setTotalSets] = useState("");
   const { token } = useSelector((state) => state.authSlice);
 
   useEffect(() => {
@@ -18,9 +19,10 @@ const WeeklyStats = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(result);
+      console.log("weekly stats", result);
       setTotalWeightMoved(result.data.total_weight_moved);
       setTotalReps(result.data.total_reps);
+      setTotalSets(result.data.total_sets);
     };
 
     fetchWeeklyStats();
@@ -33,7 +35,7 @@ const WeeklyStats = () => {
           padding: "20px",
           borderRadius: "16px",
           width: "300px",
-          height: "200px",
+          height: "auto",
           backgroundColor: theme.palette.background.paper,
         }}
       >
@@ -54,6 +56,12 @@ const WeeklyStats = () => {
               {totalWeightMoved} lbs
             </Typography>
             have moved this week.
+          </Typography>
+          <Typography variant="body1">
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              {totalSets}
+            </Typography>
+            total sets this week.
           </Typography>
           <Typography variant="body1">
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
