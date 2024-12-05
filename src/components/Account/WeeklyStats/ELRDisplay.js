@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 const ELRDisplay = ({ elr, maxElr }) => {
-  const theme = useTheme(); // Access the MUI theme
+  const theme = useTheme();
 
   // Limit the ELR value between 0 and maxElr
   const normalizedElr = Math.min(Math.max(elr, 0), maxElr);
@@ -35,7 +35,11 @@ const ELRDisplay = ({ elr, maxElr }) => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ textAlign: "center", margin: theme.spacing(3) }}
+      sx={{
+        textAlign: "center",
+        margin: theme.spacing(3),
+        position: "relative",
+      }} // Set position to relative
     >
       <svg
         width={radius * 2 + strokeWidth}
@@ -65,8 +69,8 @@ const ELRDisplay = ({ elr, maxElr }) => {
       <Typography
         variant="h6"
         sx={{
-          position: "absolute",
-          marginTop: `${radius / 2}px`,
+          position: "relative", // Position relative to the parent box
+          marginTop: `-${radius / 2}px`, // Adjust to center the text within the arch
           color: theme.palette.text.primary, // Use theme's text color
         }}
       >
