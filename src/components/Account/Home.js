@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import WeeklyStats from "./WeeklyStats";
 import RecentWorkout from "./RecentWorkout";
 
-const Workout = () => {
+const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.authSlice);
@@ -29,31 +29,46 @@ const Workout = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
+      style={{ height: "100vh", overflow: "hidden" }}
     >
-      <Box sx={{ display: "flex", height: "80vh", width: "100vw" }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justfiyContent: "center",
-            alignItems: "center",
-            width: "100%",
-          }}
+      {/* Fixed Button */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: 16,
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+        }}
+      >
+        <Button
+          onClick={handleCreateWorkout}
+          variant="contained"
+          size="large"
+          sx={{ maxWidth: "150px", height: "64px" }}
         >
-          <Button
-            onClick={handleCreateWorkout}
-            variant="contained"
-            size="large"
-            sx={{ maxWidth: "150px", height: "64px" }}
-          >
-            <AddCircleOutlineIcon />
-          </Button>
-          <WeeklyStats />
-          <RecentWorkout />
-        </Box>
+          <AddCircleOutlineIcon />
+        </Button>
+      </Box>
+
+      {/* Scrollable Content */}
+      <Box
+        sx={{
+          marginTop: "96px", // Space to avoid overlap with the button
+          height: "calc(100vh - 96px)", // Remaining height after button
+          overflowY: "auto", // Enable scrolling
+          paddingX: "16px", // Add horizontal padding
+          paddingBottom: "16px", // Add bottom padding
+          display: "flex", // Enable flexbox layout
+          flexDirection: "column", // Stack children vertically
+          alignItems: "center", // Center children horizontally
+        }}
+      >
+        <WeeklyStats />
+        <RecentWorkout />
       </Box>
     </motion.div>
   );
 };
 
-export default Workout;
+export default Home;
