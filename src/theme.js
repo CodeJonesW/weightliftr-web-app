@@ -4,7 +4,7 @@ export const themeConfig = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#2c14b5", // Vibrant Blue
+      main: "#4a62ed", // Vibrant Blue
       contrastText: "#FFFFFF", // Text on Primary
     },
     secondary: {
