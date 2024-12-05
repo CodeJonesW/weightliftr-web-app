@@ -50,6 +50,7 @@ const ELRDisplay = ({ elr, maxElr }) => {
           stroke={theme.palette.grey[300]} // Use theme's gray for background
           strokeWidth={strokeWidth}
           fill="none"
+          strokeLinecap="round" // Ensure rounded ends for the background arch
         />
         {/* Filled Arch */}
         <path
@@ -57,7 +58,7 @@ const ELRDisplay = ({ elr, maxElr }) => {
           stroke={theme.palette.primary.main} // Use theme's primary color
           strokeWidth={strokeWidth}
           fill="none"
-          strokeLinecap="round"
+          strokeLinecap="round" // Ensure rounded ends for the filled arch
         />
       </svg>
 

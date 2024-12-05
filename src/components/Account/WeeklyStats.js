@@ -1,4 +1,4 @@
-import { Box, Typography, Card } from "@mui/material";
+import { Box, Typography, Card, Divider } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -74,6 +74,7 @@ const WeeklyStats = () => {
             total reps this week.
           </Typography>
         </Box>
+        <Divider sx={{ paddingTop: "16px" }} />
         <Box sx={{ paddingTop: "16px" }}>
           <Typography variant="body1">Effort Load Ratio</Typography>
           <ELRDisplay elr={elr} maxElr={1000} />
