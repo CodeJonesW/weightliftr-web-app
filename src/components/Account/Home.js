@@ -29,16 +29,22 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      style={{ height: "100vh", overflow: "hidden" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        overflowY: "auto",
+        scrollbarWidth: "none",
+        "&::-webkit-scrollbar": {
+          display: "none", // For Chrome, Edge, and Safari
+        },
+      }} // Prevent default scrollbar
     >
-      {/* Fixed Button */}
       <Box
         sx={{
-          position: "fixed",
-          top: 16,
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Button
@@ -51,17 +57,12 @@ const Home = () => {
         </Button>
       </Box>
 
-      {/* Scrollable Content */}
       <Box
         sx={{
-          marginTop: "96px", // Space to avoid overlap with the button
-          height: "calc(100vh - 96px)", // Remaining height after button
-          overflowY: "auto", // Enable scrolling
-          paddingX: "16px", // Add horizontal padding
-          paddingBottom: "16px", // Add bottom padding
-          display: "flex", // Enable flexbox layout
-          flexDirection: "column", // Stack children vertically
-          alignItems: "center", // Center children horizontally
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <WeeklyStats />
