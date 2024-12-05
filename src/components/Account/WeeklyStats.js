@@ -1,14 +1,17 @@
-import { Box, Typography, Card } from "@mui/material";
+import { Box, Typography, Card, Divider } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTheme } from "@mui/material/styles";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
+import ELRDisplay from "./WeeklyStats/ELRDisplay";
+
 const WeeklyStats = () => {
   const theme = useTheme();
   const [totalWeightMoved, setTotalWeightMoved] = useState("");
   const [totalReps, setTotalReps] = useState("");
   const [totalSets, setTotalSets] = useState("");
+  const [elr, setElr] = useState("");
   const { token } = useSelector((state) => state.authSlice);
 
   useEffect(() => {
@@ -23,6 +26,7 @@ const WeeklyStats = () => {
       setTotalWeightMoved(result.data.total_weight_moved);
       setTotalReps(result.data.total_reps);
       setTotalSets(result.data.total_sets);
+      setElr(result.data.elr);
     };
 
     fetchWeeklyStats();
@@ -69,6 +73,11 @@ const WeeklyStats = () => {
             </Typography>
             total reps this week.
           </Typography>
+        </Box>
+        <Divider sx={{ paddingTop: "16px" }} />
+        <Box sx={{ paddingTop: "16px" }}>
+          <Typography variant="body1">Effort Load Ratio</Typography>
+          <ELRDisplay elr={elr} maxElr={1000} />
         </Box>
       </Card>
     </Box>

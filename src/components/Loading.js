@@ -12,7 +12,7 @@ export const Loading = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.default,
       }}
     >
       <NavBar isMenuDisabled={true} />
