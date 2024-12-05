@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
@@ -8,10 +8,25 @@ const ELRDisplay = ({ elr, maxElr }) => {
   // Limit the ELR value between 0 and maxElr
   const normalizedElr = Math.min(Math.max(elr, 0), maxElr);
 
-  // Calculate the percentage of the arch to fill
-  const percentage = (normalizedElr / maxElr) * 100;
+  // State to control the current displayed value during the animation
+  const [currentElr, setCurrentElr] = useState(0);
 
-  // Calculate the angle of the filled portion in degrees (0 to 180 for a half-circle)
+  useEffect(() => {
+    let start = 0;
+    const duration = 1000; // Animation duration in milliseconds
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1); // Calculate progress
+      setCurrentElr(Math.floor(progress * normalizedElr));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+    requestAnimationFrame(step);
+  }, [normalizedElr]);
+
+  // Calculate the percentage and angle based on the animated ELR value
+  const percentage = (currentElr / maxElr) * 100;
   const angle = (percentage / 100) * 180;
 
   // SVG dimensions
@@ -39,7 +54,7 @@ const ELRDisplay = ({ elr, maxElr }) => {
         textAlign: "center",
         margin: theme.spacing(3),
         position: "relative",
-      }} // Set position to relative
+      }}
     >
       <svg
         width={radius * 2 + strokeWidth}
@@ -56,7 +71,7 @@ const ELRDisplay = ({ elr, maxElr }) => {
           fill="none"
           strokeLinecap="round" // Ensure rounded ends for the background arch
         />
-        {/* Filled Arch */}
+        {/* Animated Filled Arch */}
         <path
           d={arcPath}
           stroke={theme.palette.primary.main} // Use theme's primary color
@@ -74,7 +89,7 @@ const ELRDisplay = ({ elr, maxElr }) => {
           color: theme.palette.text.primary, // Use theme's text color
         }}
       >
-        {normalizedElr.toFixed(0)}
+        {currentElr}
       </Typography>
     </Box>
   );
