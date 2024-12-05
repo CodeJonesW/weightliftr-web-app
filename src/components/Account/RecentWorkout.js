@@ -45,7 +45,7 @@ const RecentWorkout = () => {
         padding: "20px",
         borderRadius: "16px",
         width: "300px",
-        height: "100px",
+        height: "64px",
       }}
     >
       <Box

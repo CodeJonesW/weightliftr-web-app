@@ -30,8 +30,8 @@ const ELRDisplay = ({ elr, maxElr }) => {
   const angle = (percentage / 100) * 180;
 
   // SVG dimensions
-  const radius = 100; // Radius of the half-circle
-  const strokeWidth = 20; // Width of the arch stroke
+  const radius = 80; // Radius of the half-circle
+  const strokeWidth = 16; // Width of the arch stroke
   const center = radius + strokeWidth / 2;
 
   // Calculate the end point of the arc using trigonometry
